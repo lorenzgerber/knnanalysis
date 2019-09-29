@@ -67,21 +67,21 @@ def load_dataset(name, features, test_size):
     # Split the dataset into a training and a test set
     #TODO choose a number as a seed (just to initialize the random number 
     # generator. 
-    return train_test_split(X, Y, test_size=test_size, random_state=1)
+    return train_test_split(X, Y, test_size=test_size, random_state=5)
 
 
 if __name__ == '__main__':
 
     # Choose features to train on
     #TODO
-    features = [0,1,2,3]
+    features = [0,1]
 
     # The maximum value of k
     k_max = 30
     
     # Load the dataset with a test/training set ratio of 0.33
     #TODO choose dataset and set tyest size
-    x_train, x_test, y_train, y_test = load_dataset("iris",features, 0.5)
+    x_train, x_test, y_train, y_test = load_dataset("iris",features, 0.33)
     
     # Lists to save results in
     train_scores = []
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     # Train the classifier with different values for k and save the accuracy 
     # achieved on the training and test sets
     #TODO
-    for k in range(3, k_max):
+    for k in range(1, k_max):
         trained = train_knn(x_train, y_train, k)
         train_score, test_score = evaluate_knn(trained, x_train, y_train, x_test, y_test)
         train_scores.append(train_score)
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     plt.ylabel('Accuracy')
     
     # Create x-axis
-    xaxis = [x for x in range(3, k_max)]
+    xaxis = [x for x in range(1, k_max)]
     
     # Plot the test and training scores with labels
     plt.plot(xaxis, train_scores, label='Training score')
